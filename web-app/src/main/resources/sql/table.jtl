@@ -1,0 +1,5 @@
+#namespace("table")
+    #sql("findAll")
+        SELECT * FROM table
+    #end
+#end

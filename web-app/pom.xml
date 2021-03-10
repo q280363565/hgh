@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jfinal-starter</artifactId>
+        <groupId>cn.edu.nxu.it</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>${package-type}</packaging>
+
+    <artifactId>web-app</artifactId>
+
+    <properties>
+        <jfinal.version>4.9.06</jfinal.version>
+        <jfinal-cos.version>2020.4</jfinal-cos.version>
+        <jfnal-jetty-server.version>2019.3</jfnal-jetty-server.version>
+        <jfinal-undertow.version>2.4</jfinal-undertow.version>
+        <mysql.version>8.0.22</mysql.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <jetty-plugin.version>9.4.9.v20180320</jetty-plugin.version>
+        <package-type>war</package-type>
+    </properties>
+
+
+    <profiles>
+        <profile>
+            <id>jetty</id>
+            <properties>
+                <jetty-scope>compile</jetty-scope>
+                <undertow-scope>provided</undertow-scope>
+                <jetty-port>8080</jetty-port>
+                <jetty-contextPath>/</jetty-contextPath>
+                <package-type>war</package-type>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <mainClass>cn.edu.nxu.it.JettyStarter</mainClass>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>run-jetty</id>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>${jetty-plugin.version}</version>
+                        <configuration>
+                            <httpConnector>
+                                <port>${jetty-port}</port>
+                            </httpConnector>
+                            <stopPort>9966</stopPort>
+                            <stopKey>stop</stopKey>
+                            <scanIntervalSeconds>5</scanIntervalSeconds>
+                            <webApp>
+                                <contextPath>${jetty-contextPath}</contextPath>
+                            </webApp>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>tomcat</id>
+            <properties>
+                <jetty-scope>provided</jetty-scope>
+                <undertow-scope>provided</undertow-scope>
+                <jetty-port>8080</jetty-port>
+                <jetty-contextPath>/</jetty-contextPath>
+                <package-type>war</package-type>
+            </properties>
+            <activation>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>undertow</id>
+            <properties>
+                <jetty-scope>provided</jetty-scope>
+                <undertow-scope>compile</undertow-scope>
+                <jetty-port>8080</jetty-port>
+                <jetty-contextpath>/</jetty-contextpath>
+                <package-type>jar</package-type>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <configuration>
+                            <mainClass>cn.edu.nxu.it.Application</mainClass>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>run-undertow</id>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <dependencies>
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jfnal-jetty-server.version}</version>
+            <scope>${jetty-scope}</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-undertow</artifactId>
+            <version>${jfinal-undertow.version}</version>
+            <scope>${undertow-scope}</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>${jfinal.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>cos</artifactId>
+            <version>${jfinal-cos.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.nxu.mjl</groupId>
+            <artifactId>jfinal-freemarker-helper</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.edu.nxu.mjl</groupId>
+            <artifactId>jfinal-ext-test</artifactId>
+            <version>0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.8</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.6</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+<!--
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.1</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+    </dependencies>
+    
+    <build>
+        <finalName>App</finalName>
+        <plugins>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>*.txt</exclude>
+                        <exclude>*.xml</exclude>
+                        <exclude>*.properties</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+
+                        <configuration>
+                            <!-- 打包生成的文件名 -->
+                            <finalName>${project.artifactId}</finalName>
+                            <!-- jar 等压缩文件在被打包进入 zip、tar.gz 时是否压缩，设置为 false 可加快打包速度 -->
+                            <recompressZippedFiles>false</recompressZippedFiles>
+                            <!-- 打包生成的文件是否要追加 release.xml 中定义的 id 值 -->
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <!-- 指向打包描述文件 package.xml -->
+                            <descriptors>
+                                <descriptor>package.xml</descriptor>
+                            </descriptors>
+                            <!-- 打包结果输出的基础目录 -->
+                            <outputDirectory>${project.build.directory}/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
