@@ -13,7 +13,7 @@
     <artifactId>web-app</artifactId>
 
     <properties>
-        <jfinal.version>4.9.06</jfinal.version>
+        <jfinal.version>4.9.08</jfinal.version>
         <jfinal-cos.version>2020.4</jfinal-cos.version>
         <jfnal-jetty-server.version>2019.3</jfnal-jetty-server.version>
         <jfinal-undertow.version>2.4</jfinal-undertow.version>
