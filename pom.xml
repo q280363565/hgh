@@ -12,10 +12,8 @@
         <module>web-app</module>
     </modules>
     <properties>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <package-type>war</package-type>
     </properties>
     <build>
         <plugins>
@@ -43,7 +41,6 @@
     </build>
 
     <repositories>
-
         <repository>
             <id>mjl</id>
             <name>mjl</name>

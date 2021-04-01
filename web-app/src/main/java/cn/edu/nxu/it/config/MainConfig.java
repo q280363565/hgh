@@ -9,14 +9,16 @@ import com.jfinal.template.Engine;
 public class MainConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
-/*
+
         //加载配置文件 文件放到/src/main/resources下
-        loadPropertyFile("myconfig.properties");
+        //PropKit.use("myconfig.properties.example");
+
         //配置JFInal的开发模式
-        constants.setDevMode(getPropertyToBoolean("devMode", false));
+        //constants.setDevMode(PropKit.getBoolean("devMode", true));
+
         //允许直接访问JSP文件
         constants.setDenyAccessJsp(false);
-*/
+
     }
 
     @Override
@@ -25,7 +27,7 @@ public class MainConfig extends JFinalConfig {
         //routes.setBaseViewPath("/WEB-INF/templates");
 
         // 开启路由扫描，扫描仅会在该包以及该包的子包下进行
-    	//routes.scan("cn.edu.nxu.it.controller.");
+        routes.scan("cn.edu.nxu.it.controller.");
 
     }
 
@@ -37,35 +39,36 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configPlugin(Plugins plugins) {
         //数据库支持
-/*
+
         //添加Druid数据库连接池插件，分别传入 druid 可以根据jdbcurl自动识别驱动类型
+      /*
         DruidPlugin druidPlugin = new DruidPlugin(
-                getProperty("jdbc.url"), // jdbc url
-                getProperty("jdbc.username", "root"),  //数据库连接用户名
-                getProperty("jdbc.password", "root")  //数据库连接密码
+                PropKit.get("jdbc.url"), // jdbc url
+                PropKit.get("jdbc.username", "root"),  //数据库连接用户名
+                PropKit.get("jdbc.password", "root")  //数据库连接密码
         );
         //通过add方法添加插件
         plugins.add(druidPlugin);
-
+    */
 
         //添加ActiveRecord插件
+    /*
         ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
         plugins.add(activeRecordPlugin);
         //设置ActiveRecord插件数据库方言，默认为MysqlDialect
         activeRecordPlugin.setDialect(new MysqlDialect());
         //根据配置文件配置ActiveRecord插件的开发模式
-        activeRecordPlugin.setDevMode(getPropertyToBoolean("devMode", false));
+        activeRecordPlugin.setDevMode(PropKit.getBoolean("devMode", false));
         //根据配置文件配置ActiveRecord插件是否输出SQL语句
-        activeRecordPlugin.setShowSql(getPropertyToBoolean("showSql", false));
+        activeRecordPlugin.setShowSql(PropKit.getBoolean("showSql", false));
         activeRecordPlugin.getEngine().setToClassPathSourceFactory();
         activeRecordPlugin.getEngine().setCompressorOn(' ');
         activeRecordPlugin.getEngine().setBaseTemplatePath("sql");
         activeRecordPlugin.addSqlTemplate("all.jtl");
 
         //调用生成器生成的表映射
-       //_MappingKit.mapping(activeRecordPlugin);
-*/
-
+        //_MappingKit.mapping(activeRecordPlugin);
+    */
     }
 
     @Override

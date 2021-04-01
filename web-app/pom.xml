@@ -24,8 +24,8 @@
         <package-type>war</package-type>
     </properties>
 
-
     <profiles>
+        <!-- jetty 环境配置 -->
         <profile>
             <id>jetty</id>
             <properties>
@@ -76,29 +76,28 @@
             </build>
         </profile>
 
+        <!-- tomcat 环境配置 -->
         <profile>
             <id>tomcat</id>
             <properties>
                 <jetty-scope>provided</jetty-scope>
                 <undertow-scope>provided</undertow-scope>
-                <jetty-port>8080</jetty-port>
-                <jetty-contextPath>/</jetty-contextPath>
                 <package-type>war</package-type>
             </properties>
             <activation>
             </activation>
         </profile>
 
+        <!-- undertow 环境配置 -->
         <profile>
             <id>undertow</id>
             <properties>
                 <jetty-scope>provided</jetty-scope>
                 <undertow-scope>compile</undertow-scope>
-                <jetty-port>8080</jetty-port>
-                <jetty-contextpath>/</jetty-contextpath>
                 <package-type>jar</package-type>
             </properties>
             <activation>
+                <!-- 默认配置 -->
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
@@ -123,18 +122,34 @@
             </build>
         </profile>
     </profiles>
+
     <dependencies>
+        <!-- junit测试套件-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- jfinal核心类 -->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>${jfinal.version}</version>
+        </dependency>
+
+        <!-- 文件上传 -->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>cos</artifactId>
+            <version>${jfinal-cos.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jetty-server</artifactId>
             <version>${jfnal-jetty-server.version}</version>
-            <scope>${jetty-scope}</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-jsp</artifactId>
-            <version>9.2.26.v20180806</version>
             <scope>${jetty-scope}</scope>
         </dependency>
 
@@ -145,12 +160,14 @@
             <scope>${undertow-scope}</scope>
         </dependency>
 
-        <!--  开启undertow的jsp支持
+        <!-- Undertow JSP支持 -->
         <dependency>
             <groupId>io.undertow.jastow</groupId>
             <artifactId>jastow</artifactId>
             <version>2.1.0.Final</version>
+            <scope>${undertow-scope}</scope>
             <exclusions>
+                <!-- 以下两个包跟jfinal-undertow依赖冲突 -->
                 <exclusion>
                     <groupId>io.undertow</groupId>
                     <artifactId>undertow-servlet</artifactId>
@@ -161,52 +178,46 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        -->
+
+        <!-- Undertow JSP支持 -->
         <dependency>
             <groupId>org.jboss.spec.javax.servlet.jsp</groupId>
             <artifactId>jboss-jsp-api_2.3_spec</artifactId>
             <version>2.0.0.Final</version>
+            <scope>${undertow-scope}</scope>
         </dependency>
 
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>jfinal</artifactId>
-            <version>${jfinal.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>cos</artifactId>
-            <version>${jfinal-cos.version}</version>
-        </dependency>
-
+        <!-- druid 连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.2.4</version>
         </dependency>
 
+        <!-- mysql jdbc驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- freemarker模板 -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.30</version>
         </dependency>
 
-        <dependency>
-            <groupId>cn.edu.nxu.mjl</groupId>
-            <artifactId>jfinal-freemarker-helper</artifactId>
-            <version>0.1</version>
-        </dependency>
+        <!-- freemarker 模板继承功能辅助类 -->
+        <!--
+          <dependency>
+               <groupId>cn.edu.nxu.mjl</groupId>
+               <artifactId>jfinal-freemarker-helper</artifactId>
+               <version>0.1</version>
+           </dependency>
+        -->
 
+        <!-- jfinal test辅助类 -->
         <dependency>
             <groupId>cn.edu.nxu.mjl</groupId>
             <artifactId>jfinal-ext-test</artifactId>
@@ -214,10 +225,11 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- ehcache 缓存-->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
-            <version>2.6.8</version>
+            <version>2.6.11</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -226,6 +238,7 @@
             </exclusions>
         </dependency>
 
+        <!-- 日志输出 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -251,51 +264,31 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <!-- hutool -->
         <!--
                 <dependency>
                     <groupId>cn.hutool</groupId>
                     <artifactId>hutool-all</artifactId>
                     <version>5.4.1</version>
-                </dependency>-->
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
+                </dependency>
+         -->
 
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <finalName>App</finalName>
         <plugins>
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <excludes>
-                        <exclude>*.txt</exclude>
-                        <exclude>*.xml</exclude>
-                        <exclude>*.properties</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
@@ -329,6 +322,7 @@
                 </executions>
             </plugin>
         </plugins>
+
     </build>
 
 </project>
