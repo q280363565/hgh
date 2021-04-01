@@ -14,8 +14,9 @@ public class MainConfig extends JFinalConfig {
         loadPropertyFile("myconfig.properties");
         //配置JFInal的开发模式
         constants.setDevMode(getPropertyToBoolean("devMode", false));
+        //允许直接访问JSP文件
+        constants.setDenyAccessJsp(false);
 */
-
     }
 
     @Override

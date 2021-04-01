@@ -132,10 +132,40 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jsp</artifactId>
+            <version>9.2.26.v20180806</version>
+            <scope>${jetty-scope}</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal-undertow</artifactId>
             <version>${jfinal-undertow.version}</version>
             <scope>${undertow-scope}</scope>
+        </dependency>
+
+        <!--  开启undertow的jsp支持
+        <dependency>
+            <groupId>io.undertow.jastow</groupId>
+            <artifactId>jastow</artifactId>
+            <version>2.1.0.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.undertow</groupId>
+                    <artifactId>undertow-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet.jsp</groupId>
+            <artifactId>jboss-jsp-api_2.3_spec</artifactId>
+            <version>2.0.0.Final</version>
         </dependency>
 
 
@@ -221,12 +251,12 @@
             <version>${log4j.version}</version>
         </dependency>
 
-<!--
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.4.1</version>
-        </dependency>-->
+        <!--
+                <dependency>
+                    <groupId>cn.hutool</groupId>
+                    <artifactId>hutool-all</artifactId>
+                    <version>5.4.1</version>
+                </dependency>-->
 
         <dependency>
             <groupId>mysql</groupId>
@@ -241,7 +271,7 @@
         </dependency>
 
     </dependencies>
-    
+
     <build>
         <finalName>App</finalName>
         <plugins>
