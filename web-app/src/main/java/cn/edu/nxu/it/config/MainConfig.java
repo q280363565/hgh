@@ -27,7 +27,7 @@ public class MainConfig extends JFinalConfig {
         //routes.setBaseViewPath("/WEB-INF/templates");
 
         // 开启路由扫描，扫描仅会在该包以及该包的子包下进行
-        routes.scan("cn.edu.nxu.it.controller.");
+        //routes.scan("cn.edu.nxu.it.controller.");
 
     }
 
