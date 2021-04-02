@@ -15,7 +15,7 @@
     <properties>
         <jfinal.version>4.9.08</jfinal.version>
         <jfinal-cos.version>2020.4</jfinal-cos.version>
-        <jfnal-jetty-server.version>2019.3</jfnal-jetty-server.version>
+        <jfinal-jetty-server.version>2019.3</jfinal-jetty-server.version>
         <jetty-jsp.version>9.2.26.v20180806</jetty-jsp.version>
         <jfinal-undertow.version>2.4</jfinal-undertow.version>
         <mysql.version>8.0.22</mysql.version>
@@ -76,13 +76,13 @@
                 </plugins>
             </build>
             <dependencies>
-            	<!-- jetty JSP支持 -->
-            	<dependency>
-		            <groupId>org.eclipse.jetty</groupId>
-		            <artifactId>jetty-jsp</artifactId>
-		            <version>${jetty-jsp.version}</version>	
-					<scope>${jetty-scope}</scope>
-        		</dependency>
+                <!-- jetty JSP支持 -->
+                <dependency>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-jsp</artifactId>
+                    <version>${jetty-jsp.version}</version>
+                    <scope>${jetty-scope}</scope>
+                </dependency>
             </dependencies>
         </profile>
 
@@ -131,32 +131,32 @@
                 </plugins>
             </build>
             <dependencies>
-            	<!-- Undertow JSP支持 -->
-		        <dependency>
-		            <groupId>io.undertow.jastow</groupId>
-		            <artifactId>jastow</artifactId>
-		            <version>2.1.0.Final</version>
-		            <scope>${undertow-scope}</scope>
-		            <exclusions>
-		                <!-- 以下两个包跟jfinal-undertow依赖冲突 -->
-		                <exclusion>
-		                    <groupId>io.undertow</groupId>
-		                    <artifactId>undertow-servlet</artifactId>
-		                </exclusion>
-		                <exclusion>
-		                    <groupId>org.jboss.logging</groupId>
-		                    <artifactId>jboss-logging</artifactId>
-		                </exclusion>
-		            </exclusions>
-		        </dependency>
+                <!-- Undertow JSP支持 -->
+                <dependency>
+                    <groupId>io.undertow.jastow</groupId>
+                    <artifactId>jastow</artifactId>
+                    <version>2.1.0.Final</version>
+                    <scope>${undertow-scope}</scope>
+                    <exclusions>
+                        <!-- 以下两个包跟jfinal-undertow依赖冲突 -->
+                        <exclusion>
+                            <groupId>io.undertow</groupId>
+                            <artifactId>undertow-servlet</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.logging</groupId>
+                            <artifactId>jboss-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
 
-		        <!-- Undertow JSP支持 -->
-		        <dependency>
-		            <groupId>org.jboss.spec.javax.servlet.jsp</groupId>
-		            <artifactId>jboss-jsp-api_2.3_spec</artifactId>
-		            <version>2.0.0.Final</version>
-		            <scope>${undertow-scope}</scope>
-		        </dependency>
+                <!-- Undertow JSP支持 -->
+                <dependency>
+                    <groupId>org.jboss.spec.javax.servlet.jsp</groupId>
+                    <artifactId>jboss-jsp-api_2.3_spec</artifactId>
+                    <version>2.0.0.Final</version>
+                    <scope>${undertow-scope}</scope>
+                </dependency>
             </dependencies>
         </profile>
     </profiles>
@@ -187,7 +187,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${jfnal-jetty-server.version}</version>
+            <version>${jfinal-jetty-server.version}</version>
             <scope>${jetty-scope}</scope>
         </dependency>
 
@@ -196,7 +196,7 @@
             <artifactId>jfinal-undertow</artifactId>
             <version>${jfinal-undertow.version}</version>
             <scope>${undertow-scope}</scope>
-        </dependency>        
+        </dependency>
 
         <!-- druid 连接池 -->
         <dependency>
